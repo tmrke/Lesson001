@@ -6,12 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lesson001.data.Note
 import com.example.lesson001.domain.AddNoteUseCase
+import com.example.lesson001.domain.CreateNoteUseCase
+import com.example.lesson001.domain.DeleteNotesUseCase
 import com.example.lesson001.domain.GetNotesUseCase
 import kotlinx.coroutines.launch
 
 class NotesListViewModel(
     private val getNotesUseCase: GetNotesUseCase = GetNotesUseCase(),
-    private val addNoteUseCase: AddNoteUseCase = AddNoteUseCase()
+    private val addNoteUseCase: AddNoteUseCase = AddNoteUseCase(),
+    private val createNoteUseCase: CreateNoteUseCase = CreateNoteUseCase(),
+    private val deleteNoteUseCase: DeleteNotesUseCase = DeleteNotesUseCase()
 ) : ViewModel() {
 
     private val _notesListLiveData = MutableLiveData<List<Note>>()
@@ -31,7 +35,19 @@ class NotesListViewModel(
             }
         }
     }
-}
 
+    fun createNote(text: String) {
+        viewModelScope.launch {
+            createNoteUseCase.execute(text)
+        }
+    }
+
+    fun deleteNote(id: String) {
+        viewModelScope.launch {
+            deleteNoteUseCase.execute(id)
+            getNotes()
+        }
+    }
+}
 
 fun MutableLiveData<*>.toLiveData() = this as LiveData<*>

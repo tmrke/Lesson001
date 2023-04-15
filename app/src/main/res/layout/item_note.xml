@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:longClickable="true"
         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
         tools:text="Note text that resizes the card vertically to fit itself. It can be very long, but let’s settle on 180 characters as the limit"
         />

@@ -11,9 +11,14 @@ import com.example.lesson001.databinding.ItemNoteBinding
 class NotesListAdapter : ListAdapter<Note, NotesListAdapter.NoteViewHolder>(diffUtil) {
 
     private var onNoteClick: (Note) -> Unit = {}
+    private var onNoteLongClick: (Note) -> Unit = {}
 
     fun setCallback(callback: (Note) -> Unit) {
         this.onNoteClick = callback
+    }
+
+    fun setCallbackLong(callback: (Note) -> Unit) {
+        this.onNoteLongClick = callback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -37,6 +42,12 @@ class NotesListAdapter : ListAdapter<Note, NotesListAdapter.NoteViewHolder>(diff
         fun bind(item: Note) {
             with(binding) {
                 root.setOnClickListener { onNoteClick(item) }
+                root.setOnLongClickListener {
+                    onNoteLongClick(item)
+                    true
+                }
+
+
                 textViewText.text = item.text
             }
         }

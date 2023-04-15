@@ -2,6 +2,7 @@ package com.example.lesson001.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
 
+//Model
 object NotesDataSource {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "notes")
 
@@ -22,13 +24,36 @@ object NotesDataSource {
             context.dataStore.edit { preferences ->
                 val note = Note(text = text)
                 val key = stringPreferencesKey(note.id)
+
                 preferences[key] = note.text
             }
         }
     }
 
-    fun getNotes(): Flow<List<Note>> {
-        return applicationContext?.let { context ->
+    suspend fun createNote(text: String) {
+        applicationContext?.let { context ->
+            context.dataStore.edit { preferences ->
+                val note = Note(text = text)
+                val key = stringPreferencesKey(note.id)
+
+                preferences[key] = note.text
+            }
+
+        }
+    }
+
+    suspend fun deleteNote(id: String) {
+        applicationContext?.let { context ->
+            val key = stringPreferencesKey(id)
+            context.dataStore.edit { preferences ->
+                preferences.remove(key)
+            }
+        }
+    }
+
+
+    fun getNotes(): Flow<List<Note>> {                                          //спросить про этот метод
+        val notesFlow: Flow<List<Note>> = applicationContext?.let { context ->
             context.dataStore.data.map { preferences ->
                 preferences.asMap().map { entry ->
                     Note(
@@ -38,5 +63,7 @@ object NotesDataSource {
                 }
             }
         } ?: emptyFlow()
+
+        return notesFlow
     }
 }

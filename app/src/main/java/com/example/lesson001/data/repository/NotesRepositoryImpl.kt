@@ -1,6 +1,5 @@
 package com.example.lesson001.data.repository
 
-import android.provider.ContactsContract
 import com.example.lesson001.data.Note
 import com.example.lesson001.data.NotesDataSource
 import kotlinx.coroutines.flow.Flow
@@ -14,5 +13,13 @@ class NotesRepositoryImpl(
 
     override suspend fun addNote(text: String) {
         notesDataSource.addNote(text)
+    }
+
+    override suspend fun createNote(text: String) {
+        notesDataSource.createNote(text)
+    }
+
+    override suspend fun deleteNote(id: String) {
+        notesDataSource.deleteNote(id)
     }
 }
