@@ -11,6 +11,7 @@ class NotesApplication : Application() {
     companion object {
         private var instance: NotesApplication? = null
 
+
         fun getApplicationContext() = instance?.applicationContext
     }
 }

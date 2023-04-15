@@ -3,9 +3,11 @@ package com.example.lesson001.presentation.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.lesson001.data.Note
 import com.example.lesson001.domain.AddNoteUseCase
 import com.example.lesson001.domain.GetNotesUseCase
+import kotlinx.coroutines.launch
 
 class NotesListViewModel(
     private val getNotesUseCase: GetNotesUseCase = GetNotesUseCase(),
@@ -15,13 +17,19 @@ class NotesListViewModel(
     private val _notesListLiveData = MutableLiveData<List<Note>>()
     val notesListLiveData: LiveData<List<Note>> = _notesListLiveData
 
-    fun onAddClicked(text:String) {
-        addNoteUseCase.execute(text)
-        getNotes()
+    fun onAddClicked(text: String) {
+        viewModelScope.launch {
+            addNoteUseCase.execute(text)
+            getNotes()
+        }
     }
 
     fun getNotes() {
-        _notesListLiveData.value = getNotesUseCase.execute().toList()
+        viewModelScope.launch {
+            getNotesUseCase.execute().collect { list ->
+                _notesListLiveData.value = list
+            }
+        }
     }
 }
 

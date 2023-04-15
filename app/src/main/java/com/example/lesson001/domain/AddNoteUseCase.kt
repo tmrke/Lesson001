@@ -4,9 +4,9 @@ import com.example.lesson001.data.repository.NotesRepository
 import com.example.lesson001.data.repository.NotesRepositoryImpl
 
 class AddNoteUseCase(
-    private val notesRepository : NotesRepository = NotesRepositoryImpl()
+    private val notesRepository: NotesRepository = NotesRepositoryImpl()
 ) {
-    fun execute(text:String){
+    suspend fun execute(text: String) {
         notesRepository.addNote(text)
     }
 }
