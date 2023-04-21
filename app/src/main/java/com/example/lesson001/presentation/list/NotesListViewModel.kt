@@ -9,15 +9,17 @@ import com.example.lesson001.domain.AddNoteUseCase
 import com.example.lesson001.domain.CreateNoteUseCase
 import com.example.lesson001.domain.DeleteNotesUseCase
 import com.example.lesson001.domain.GetNotesUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NotesListViewModel(
-    private val getNotesUseCase: GetNotesUseCase = GetNotesUseCase(),
-    private val addNoteUseCase: AddNoteUseCase = AddNoteUseCase(),
-    private val createNoteUseCase: CreateNoteUseCase = CreateNoteUseCase(),
-    private val deleteNoteUseCase: DeleteNotesUseCase = DeleteNotesUseCase()
+@HiltViewModel
+class NotesListViewModel @Inject constructor(
+    private val getNotesUseCase: GetNotesUseCase,
+    private val addNoteUseCase: AddNoteUseCase,
+    private val createNoteUseCase: CreateNoteUseCase,
+    private val deleteNoteUseCase: DeleteNotesUseCase
 ) : ViewModel() {
-
     private val _notesListLiveData = MutableLiveData<List<Note>>()
     val notesListLiveData: LiveData<List<Note>> = _notesListLiveData
 
@@ -42,7 +44,7 @@ class NotesListViewModel(
         }
     }
 
-    fun deleteNote(id: String) {
+    fun deleteNote(id: Long) {
         viewModelScope.launch {
             deleteNoteUseCase.execute(id)
             getNotes()

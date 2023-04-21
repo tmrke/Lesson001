@@ -2,11 +2,12 @@ package com.example.lesson001.domain
 
 import com.example.lesson001.data.repository.NotesRepository
 import com.example.lesson001.data.repository.NotesRepositoryImpl
+import javax.inject.Inject
 
-class DeleteNotesUseCase(
-    private val notesRepository: NotesRepository = NotesRepositoryImpl()
+class DeleteNotesUseCase  @Inject constructor(
+    private val notesRepository: NotesRepository
 ) {
-    suspend fun execute(id: String){
+    suspend fun execute(id: Long){
         notesRepository.deleteNote(id)
     }
 }

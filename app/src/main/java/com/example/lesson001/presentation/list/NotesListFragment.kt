@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.lesson001.R
 import com.example.lesson001.databinding.FragmentNotesListBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class NotesListFragment : Fragment(R.layout.fragment_notes_list) {
 
     companion object {
@@ -22,7 +25,8 @@ class NotesListFragment : Fragment(R.layout.fragment_notes_list) {
     private val binding by viewBinding(FragmentNotesListBinding::bind)
     private val viewModel by viewModels<NotesListViewModel>()
 
-    private val listAdapter = NotesListAdapter()
+    @Inject
+    lateinit var listAdapter: NotesListAdapter      //lateinit на случай, если listAdapter будет null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

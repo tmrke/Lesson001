@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson001.data.Note
 import com.example.lesson001.databinding.ItemNoteBinding
+import javax.inject.Inject
 
-class NotesListAdapter : ListAdapter<Note, NotesListAdapter.NoteViewHolder>(diffUtil) {
+class NotesListAdapter @Inject constructor() :
+    ListAdapter<Note, NotesListAdapter.NoteViewHolder>(diffUtil) {
 
     private var onNoteClick: (Note) -> Unit = {}
     private var onNoteLongClick: (Note) -> Unit = {}

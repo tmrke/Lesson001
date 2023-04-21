@@ -2,9 +2,10 @@ package com.example.lesson001.domain
 
 import com.example.lesson001.data.repository.NotesRepository
 import com.example.lesson001.data.repository.NotesRepositoryImpl
+import javax.inject.Inject
 
-class CreateNoteUseCase(
-    private val notesRepository: NotesRepository = NotesRepositoryImpl()
+class  CreateNoteUseCase  @Inject constructor(
+    private val notesRepository: NotesRepository
 ) {
     suspend fun execute(text: String){
         notesRepository.createNote(text)
