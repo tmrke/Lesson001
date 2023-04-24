@@ -6,7 +6,7 @@ import com.example.lesson001.data.repository.NotesRepositoryImpl
 class AddNoteUseCase(
     private val notesRepository: NotesRepository = NotesRepositoryImpl()
 ) {
-    suspend fun execute(text: String) {
+    suspend fun execute(text: String){
         notesRepository.addNote(text)
     }
 }

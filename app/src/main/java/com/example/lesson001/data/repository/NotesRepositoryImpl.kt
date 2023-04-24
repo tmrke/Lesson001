@@ -15,10 +15,6 @@ class NotesRepositoryImpl(
         notesDataSource.addNote(text)
     }
 
-    override suspend fun createNote(text: String) {
-        notesDataSource.createNote(text)
-    }
-
     override suspend fun deleteNote(id: String) {
         notesDataSource.deleteNote(id)
     }
