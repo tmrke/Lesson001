@@ -11,15 +11,10 @@ import com.example.lesson001.databinding.ItemNoteBinding
 
 class NotesListAdapter : ListAdapter<Note, NotesListAdapter.NoteViewHolder>(diffUtil) {
     private var onNoteClick: (Note) -> Unit = {}
-    private var onNoteLongClick: (Note) -> Unit = {}
     private var onSwipeToDeleteItem: (Note) -> Unit = {}
 
     fun setCallback(callback: (Note) -> Unit) {
         this.onNoteClick = callback
-    }
-
-    fun setCallbackLong(callback: (Note) -> Unit) {
-        this.onNoteLongClick = callback
     }
 
     fun setCallbackSwipeToDelete(callback: (Note) -> Unit) {
@@ -51,12 +46,7 @@ class NotesListAdapter : ListAdapter<Note, NotesListAdapter.NoteViewHolder>(diff
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Note) {
             with(binding) {
-                root.setOnClickListener { onNoteClick(item) }
-
-                root.setOnLongClickListener {
-                    onNoteLongClick(item)
-                    true
-                }
+             //   root.setOnClickListener { onNoteClick(item) }
 
                 textViewText.text = item.text
             }

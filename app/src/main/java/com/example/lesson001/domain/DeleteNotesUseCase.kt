@@ -6,7 +6,7 @@ import com.example.lesson001.data.repository.NotesRepositoryImpl
 class DeleteNotesUseCase(
     private val notesRepository: NotesRepository = NotesRepositoryImpl()
 ) {
-    suspend fun execute(id: String){
+    suspend fun execute(id: String) {
         notesRepository.deleteNote(id)
     }
 }

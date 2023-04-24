@@ -24,7 +24,6 @@ class NotesListFragment : Fragment(R.layout.fragment_notes_list) {
 
     private val listAdapter = NotesListAdapter()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
@@ -32,9 +31,6 @@ class NotesListFragment : Fragment(R.layout.fragment_notes_list) {
         viewModel.getNotes()
 
         val recyclerView = binding.recyclerView
-
-
-
 
         recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
