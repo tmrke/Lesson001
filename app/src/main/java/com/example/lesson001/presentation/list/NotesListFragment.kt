@@ -47,11 +47,12 @@ class NotesListFragment : Fragment(R.layout.fragment_notes_list) {
             }
         }
 
-        val swipeToDeleteCallback = SwipeToDeleteCallback(binding.recyclerView.adapter as NotesListAdapter)
+        val swipeToDeleteCallback =
+            SwipeToDeleteCallback(binding.recyclerView.adapter as NotesListAdapter)
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-                binding.floatingActionButton.setOnClickListener {
+        binding.floatingActionButton.setOnClickListener {
             navController.navigate(R.id.createNoteFragment)
         }
 
