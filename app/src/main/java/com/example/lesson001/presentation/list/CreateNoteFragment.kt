@@ -22,7 +22,12 @@ class CreateNoteFragment : Fragment(R.layout.fragment_create_note) {
         val navController = Navigation.findNavController(view)
 
         binding.floatingActionButton.setOnClickListener {
-            viewModel.createNote(binding.editText.text.toString())
+            val noteText = binding.editText.text.toString()
+
+            if (noteText.isNotEmpty()) {
+                viewModel.createNote(binding.editText.text.toString())
+            }
+
             navController.navigate(R.id.notesListFragment)
         }
     }
