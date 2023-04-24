@@ -13,14 +13,14 @@ class NotesListAdapter @Inject constructor() :
     ListAdapter<Note, NotesListAdapter.NoteViewHolder>(diffUtil) {
 
     private var onNoteClick: (Note) -> Unit = {}
-    private var onNoteLongClick: (Note) -> Unit = {}
+    private var onSwipeToDeleteItem: (Note) -> Unit = {}
+    fun setCallbackSwipeToDelete(callback: (Note) -> Unit) {
+        this.onSwipeToDeleteItem = callback
+
+    }
 
     fun setCallback(callback: (Note) -> Unit) {
         this.onNoteClick = callback
-    }
-
-    fun setCallbackLong(callback: (Note) -> Unit) {
-        this.onNoteLongClick = callback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -37,21 +37,16 @@ class NotesListAdapter @Inject constructor() :
         holder.bind(getItem(position))
     }
 
+    fun delete(item: Note) {
+        onSwipeToDeleteItem(item)
+    }
+
     inner class NoteViewHolder(
         private val binding: ItemNoteBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Note) {
-            with(binding) {
-                root.setOnClickListener { onNoteClick(item) }
-                root.setOnLongClickListener {
-                    onNoteLongClick(item)
-                    true
-                }
-
-
-                textViewText.text = item.text
-            }
+            binding.textViewText.text = item.text
         }
     }
 }

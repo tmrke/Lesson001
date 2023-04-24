@@ -9,7 +9,6 @@ import androidx.navigation.Navigation
 
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.lesson001.R
-import com.example.lesson001.data.Note
 import com.example.lesson001.databinding.FragmentCreateNoteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +23,7 @@ class CreateNoteFragment : Fragment(R.layout.fragment_create_note) {
         val navController = Navigation.findNavController(view)
 
         binding.floatingActionButton.setOnClickListener {
-            viewModel.createNote(binding.editText.text.toString())
+            viewModel.addNote(binding.editText.text.toString())
             navController.navigate(R.id.notesListFragment)
         }
     }

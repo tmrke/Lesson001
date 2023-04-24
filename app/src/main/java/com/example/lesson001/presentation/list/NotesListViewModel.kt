@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lesson001.data.Note
 import com.example.lesson001.domain.AddNoteUseCase
-import com.example.lesson001.domain.CreateNoteUseCase
 import com.example.lesson001.domain.DeleteNotesUseCase
 import com.example.lesson001.domain.GetNotesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,20 +16,12 @@ import javax.inject.Inject
 class NotesListViewModel @Inject constructor(
     private val getNotesUseCase: GetNotesUseCase,
     private val addNoteUseCase: AddNoteUseCase,
-    private val createNoteUseCase: CreateNoteUseCase,
     private val deleteNoteUseCase: DeleteNotesUseCase
 ) : ViewModel() {
     private val _notesListLiveData = MutableLiveData<List<Note>>()
     val notesListLiveData: LiveData<List<Note>> = _notesListLiveData
 
-    fun onAddClicked(text: String) {
-        viewModelScope.launch {
-            addNoteUseCase.execute(text)
-            getNotes()
-        }
-    }
-
-    fun getNotes() {
+        fun getNotes() {
         viewModelScope.launch {
             getNotesUseCase.execute().collect { list ->
                 _notesListLiveData.value = list
@@ -38,9 +29,9 @@ class NotesListViewModel @Inject constructor(
         }
     }
 
-    fun createNote(text: String) {
+    fun addNote(text: String) {
         viewModelScope.launch {
-            createNoteUseCase.execute(text)
+            addNoteUseCase.execute(text)
         }
     }
 

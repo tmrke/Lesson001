@@ -22,11 +22,7 @@ class NotesRepositoryImpl @Inject constructor(
         notesDAO.addNote(NoteEntity(text = text))
     }
 
-    override suspend fun createNote(text: String) {
-//        notesDAO.createNote(text)
-    }
-
     override suspend fun deleteNote(id: Long) {
-//        notesDAO.deleteNote(id)
+        notesDAO.deleteNote(id)
     }
 }
