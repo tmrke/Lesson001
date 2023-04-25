@@ -19,7 +19,7 @@ class NotesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addNote(text: String) {
-        notesDAO.addNote(NoteEntity(text = text))
+        notesDAO.addNote(NoteEntity(text = text)) //TODO
     }
 
     override suspend fun deleteNote(id: Long) {

@@ -3,5 +3,6 @@
    <string name="notes_list_title">QuickNote</string>
     <string name="sent">sent</string>
     <string name="add_image">add image</string>
+    <string name="image">image</string>
 
 </resources>

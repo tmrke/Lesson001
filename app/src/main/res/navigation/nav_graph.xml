@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/createNoteFragment"
-        android:name="com.example.lesson001.presentation.list.CreateNoteFragment"
+        android:name="com.example.lesson001.presentation.creator.CreateNoteFragment"
         android:label="CreateNoteFragment" >
         <action
             android:id="@+id/action_createNoteFragment_to_notesListFragment"
