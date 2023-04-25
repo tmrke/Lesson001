@@ -1,5 +1,6 @@
 package com.example.lesson001.presentation.list
 
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,9 +30,9 @@ class NotesListViewModel @Inject constructor(
         }
     }
 
-    fun addNote(text: String) {
+    fun addNote(text: String, bitmap: Bitmap?) {
         viewModelScope.launch {
-            addNoteUseCase.execute(text)
+            addNoteUseCase.execute(text, bitmap)
         }
     }
 
@@ -42,5 +43,3 @@ class NotesListViewModel @Inject constructor(
         }
     }
 }
-
-fun MutableLiveData<*>.toLiveData() = this as LiveData<*>

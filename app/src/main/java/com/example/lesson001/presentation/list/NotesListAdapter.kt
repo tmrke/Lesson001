@@ -46,7 +46,10 @@ class NotesListAdapter @Inject constructor() :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Note) {
-            binding.textViewText.text = item.text
+            with(binding) {
+                textViewText.text = item.text
+                imageViewImage.setImageBitmap(item.bitmap)
+            }
         }
     }
 }

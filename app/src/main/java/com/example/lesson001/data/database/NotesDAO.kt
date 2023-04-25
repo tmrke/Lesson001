@@ -1,5 +1,6 @@
 package com.example.lesson001.data.database
 
+import android.graphics.Bitmap
 import android.provider.ContactsContract.CommonDataKinds.Note
 import androidx.room.Dao
 import androidx.room.Delete

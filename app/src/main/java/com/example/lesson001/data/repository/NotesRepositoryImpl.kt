@@ -1,5 +1,6 @@
 package com.example.lesson001.data.repository
 
+import android.graphics.Bitmap
 import com.example.lesson001.data.Note
 import com.example.lesson001.data.database.NotesDAO
 import com.example.lesson001.data.database.model.NoteEntity
@@ -18,8 +19,8 @@ class NotesRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addNote(text: String) {
-        notesDAO.addNote(NoteEntity(text = text)) //TODO
+    override suspend fun addNote(text: String, bitmap: Bitmap?) {
+        notesDAO.addNote(NoteEntity(text = text, imageData = notesMapper.toByteArray(bitmap)))
     }
 
     override suspend fun deleteNote(id: Long) {

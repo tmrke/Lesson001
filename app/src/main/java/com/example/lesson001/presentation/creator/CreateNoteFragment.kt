@@ -1,8 +1,10 @@
 package com.example.lesson001.presentation.creator
 
-import android.net.Uri
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,29 +21,34 @@ import dagger.hilt.android.AndroidEntryPoint
 class CreateNoteFragment : Fragment(R.layout.fragment_create_note) {
     private val binding by viewBinding(FragmentCreateNoteBinding::bind)
     private val viewModel by viewModels<NotesListViewModel>()
-
+    private var bitmap: Bitmap? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
 
         with(binding) {
-            floatingActionButton.setOnClickListener {
-                viewModel.addNote(binding.editText.text.toString())
-                navController.navigate(R.id.notesListFragment)
-            }
-
-            val getContent =
-                registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            val pickMedia =
+                registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                     uri?.let { imageUri ->
-                        imageView.setImageURI(imageUri)
+                        bitmap = MediaStore.Images.Media.getBitmap(
+                            requireContext().contentResolver,
+                            imageUri
+                        )
+
+                        imageView.setImageBitmap(bitmap)
                         imageView.visibility = View.VISIBLE
                     }
                 }
 
             imageButtonAddImage.setOnClickListener {
-                getContent.launch("image/*")
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                 imageButtonAddImage.visibility = View.INVISIBLE
+            }
+
+            floatingActionButton.setOnClickListener {
+                viewModel.addNote(binding.editText.text.toString(), bitmap)
+                navController.navigate(R.id.notesListFragment)
             }
         }
     }
