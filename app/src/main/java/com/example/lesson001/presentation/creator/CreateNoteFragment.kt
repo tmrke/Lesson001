@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -47,8 +48,14 @@ class CreateNoteFragment : Fragment(R.layout.fragment_create_note) {
             }
 
             floatingActionButton.setOnClickListener {
-                viewModel.addNote(binding.editText.text.toString(), bitmap)
-                navController.navigate(R.id.notesListFragment)
+                val text = binding.editText.text.toString()
+
+                if (text.isNotEmpty() && bitmap != null) {
+                    viewModel.addNote(binding.editText.text.toString(), bitmap)
+                    navController.navigate(R.id.notesListFragment)
+                } else {
+                    Toast.makeText(context, "Note can't be empty", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
