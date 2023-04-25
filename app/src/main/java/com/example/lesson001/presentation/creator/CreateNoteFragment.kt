@@ -50,11 +50,11 @@ class CreateNoteFragment : Fragment(R.layout.fragment_create_note) {
             floatingActionButton.setOnClickListener {
                 val text = binding.editText.text.toString()
 
-                if (text.isNotEmpty() && bitmap != null) {
-                    viewModel.addNote(binding.editText.text.toString(), bitmap)
-                    navController.navigate(R.id.notesListFragment)
-                } else {
+                if (text.isEmpty() && bitmap == null) {
                     Toast.makeText(context, "Note can't be empty", Toast.LENGTH_LONG).show()
+                } else {
+                    viewModel.addNote(text, bitmap)
+                    navController.navigate(R.id.notesListFragment)
                 }
             }
         }
