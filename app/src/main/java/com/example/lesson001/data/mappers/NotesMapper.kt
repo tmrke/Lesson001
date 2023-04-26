@@ -10,12 +10,24 @@ import javax.inject.Singleton
 
 @Singleton
 class NotesMapper @Inject constructor() {
-    fun fromEntityToUiModel(entity: NoteEntity): Note {
+    fun toUiModel(entity: NoteEntity): Note {
         return Note(
             id = entity.id,
             text = entity.text,
             bitmap = if (entity.imageData != null) {
                 toBitmap(entity.imageData)
+            } else {
+                null
+            }
+        )
+    }
+
+    fun toEntity(note: Note): NoteEntity {
+        return NoteEntity(
+            id = note.id,
+            text = note.text,
+            imageData = if (note.bitmap != null) {
+                toByteArray(note.bitmap)
             } else {
                 null
             }
