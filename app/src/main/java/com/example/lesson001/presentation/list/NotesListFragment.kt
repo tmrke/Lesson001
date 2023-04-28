@@ -17,12 +17,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotesListFragment : Fragment(R.layout.fragment_notes_list) {
-
-    companion object {
-        private const val MOCK_TEXT =
-            "Note text that resizes the card vertically to fit itself. It can be very long, but let’s settle on 180 characters as the limit"
-    }
-
     private val binding by viewBinding(FragmentNotesListBinding::bind)
     private val viewModel by viewModels<NotesListViewModel>()
 
@@ -49,11 +43,16 @@ class NotesListFragment : Fragment(R.layout.fragment_notes_list) {
 
         val swipeToDeleteCallback =
             SwipeToDeleteCallback(binding.recyclerView.adapter as NotesListAdapter)
+
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
         binding.floatingActionButton.setOnClickListener {
             navController.navigate(R.id.createNoteFragment)
+        }
+
+        binding.ImageButtonSearch.setOnClickListener {
+            navController.navigate(R.id.searchNoteFragment)
         }
 
         viewModel.notesListLiveData.observe(viewLifecycleOwner) { list ->

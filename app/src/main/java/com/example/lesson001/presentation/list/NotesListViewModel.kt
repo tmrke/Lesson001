@@ -16,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class NotesListViewModel @Inject constructor(
     private val getNotesUseCase: GetNotesUseCase,
-    private val addNoteUseCase: AddNoteUseCase,
     private val deleteNoteUseCase: DeleteNotesUseCase
 ) : ViewModel() {
     private val _notesListLiveData = MutableLiveData<List<Note>>()
@@ -30,13 +29,7 @@ class NotesListViewModel @Inject constructor(
         }
     }
 
-    fun addNote(text: String, bitmap: Bitmap?) {    //TODO убрать в другую viewModel в create
-        viewModelScope.launch {
-            addNoteUseCase.execute(text, bitmap)
-        }
-    }
-
-    fun deleteNote(id: Long) {
+      fun deleteNote(id: Long) {
         viewModelScope.launch {
             deleteNoteUseCase.execute(id)
             getNotes()

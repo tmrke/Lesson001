@@ -26,4 +26,8 @@ class NotesRepositoryImpl @Inject constructor(
     override suspend fun deleteNote(id: Long) {
         notesDAO.deleteNote(id)
     }
+
+    override fun getNotesBySearch(text: String) {
+        notesDAO.getNotesBySearch(text)
+    }
 }

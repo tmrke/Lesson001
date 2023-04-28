@@ -21,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class NotesSearchFragment : Fragment(R.layout.fragment_search) {
     private val binding by viewBinding(FragmentSearchBinding::bind)
-    private val viewModel by viewModels<NotesListViewModel>()
+    private val viewModel by viewModels<SearcherViewModel>()
 
     @Inject
     lateinit var listAdapter: NotesListAdapter
@@ -30,22 +30,18 @@ class NotesSearchFragment : Fragment(R.layout.fragment_search) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
 
-        viewModel.getNotes()
+        //viewModel.getNotesBySearch(binding.editText.text)
 
         val recyclerView = binding.recyclerView
 
         recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
 
-            adapter = listAdapter.apply {
-                setCallbackSwipeToDelete { note ->
-                    viewModel.deleteNote(note.id)
-                }
-            }
         }
 
         val swipeToDeleteCallback =
             SwipeToDeleteCallback(binding.recyclerView.adapter as NotesListAdapter)
+
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }

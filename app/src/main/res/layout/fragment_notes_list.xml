@@ -8,26 +8,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- TODO как сделать без LinearLayout и ровно по центру -->
-
-        <LinearLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            app:title="@string/notes_list_title"
+            app:titleCentered="true">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:title="@string/notes_list_title"
-                app:titleCentered="true" />
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
+            <ImageButton
+                android:id="@+id/ImageButtonSearch"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/margin_16dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/search"
+                android:src="@drawable/search1" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 

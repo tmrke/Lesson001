@@ -4,5 +4,7 @@
     <string name="sent">sent</string>
     <string name="add_image">add image</string>
     <string name="image">image</string>
+    <string name="quick_notes">Quick notes</string>
+    <string name="search">search</string>
 
 </resources>
