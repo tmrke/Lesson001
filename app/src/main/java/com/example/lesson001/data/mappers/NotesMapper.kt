@@ -35,13 +35,16 @@ class NotesMapper @Inject constructor() {
     }
 
     private fun toBitmap(byteArray: ByteArray?): Bitmap {
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray?.size ?: 0)
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray?.size ?: 0) //TODO поиграться со сжатием изображением
     }
 
     fun toByteArray(bitmap: Bitmap?): ByteArray? {
-        val outputStream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-
-        return outputStream.toByteArray()
+       return if( bitmap != null){
+            val outputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 60, outputStream)//TODO поиграться со сжатием изображением
+            return outputStream.toByteArray()
+        } else {
+            null
+        }
     }
 }

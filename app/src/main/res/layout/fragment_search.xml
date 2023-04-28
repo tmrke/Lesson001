@@ -18,6 +18,8 @@
                 app:navigationIcon="@drawable/ic_back_24"
                 />
 
+<!--        через меню, поиск как кнопка-->
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

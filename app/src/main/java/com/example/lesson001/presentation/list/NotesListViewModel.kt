@@ -30,7 +30,7 @@ class NotesListViewModel @Inject constructor(
         }
     }
 
-    fun addNote(text: String, bitmap: Bitmap?) {
+    fun addNote(text: String, bitmap: Bitmap?) {    //TODO убрать в другую viewModel в create
         viewModelScope.launch {
             addNoteUseCase.execute(text, bitmap)
         }
