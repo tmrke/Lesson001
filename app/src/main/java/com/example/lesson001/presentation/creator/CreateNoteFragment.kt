@@ -57,6 +57,10 @@ class CreateNoteFragment : Fragment(R.layout.fragment_create_note) {
                     navController.navigate(R.id.notesListFragment)
                 }
             }
+
+            toolbar.setOnClickListener {
+                navController.navigate(R.id.notesListFragment)
+            }
         }
     }
 }

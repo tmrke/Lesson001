@@ -27,7 +27,9 @@ class NotesRepositoryImpl @Inject constructor(
         notesDAO.deleteNote(id)
     }
 
-    override fun getNotesBySearch(text: String) {
-        notesDAO.getNotesBySearch(text)
+    override fun getNotesBySearch(text: String) :Flow<List<Note>> {
+        return notesDAO.getNotesBySearch(text).map { list ->
+            list.map { note -> notesMapper.toUiModel(note) }
+        }
     }
 }

@@ -2,7 +2,6 @@ package com.example.lesson001.presentation.list
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.lesson001.R
 import com.example.lesson001.databinding.FragmentNotesListBinding
+import com.example.lesson001.presentation.NotesListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

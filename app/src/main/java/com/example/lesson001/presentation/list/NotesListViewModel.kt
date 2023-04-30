@@ -1,12 +1,10 @@
 package com.example.lesson001.presentation.list
 
-import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lesson001.data.Note
-import com.example.lesson001.domain.AddNoteUseCase
 import com.example.lesson001.domain.DeleteNotesUseCase
 import com.example.lesson001.domain.GetNotesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

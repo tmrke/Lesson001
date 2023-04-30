@@ -1,16 +1,15 @@
-package com.example.lesson001.presentation.list
+package com.example.lesson001.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson001.data.Note
 import com.example.lesson001.databinding.ItemNoteBinding
 import javax.inject.Inject
 
 class NotesListAdapter @Inject constructor() :
-    ListAdapter<Note, NotesListAdapter.NoteViewHolder>(diffUtil) {
+    ListAdapter<Note, NoteViewHolder>(diffUtil) {
 
     private var onNoteClick: (Note) -> Unit = {}
     private var onSwipeToDeleteItem: (Note) -> Unit = {}
@@ -39,18 +38,6 @@ class NotesListAdapter @Inject constructor() :
 
     fun delete(item: Note) {
         onSwipeToDeleteItem(item)
-    }
-
-    inner class NoteViewHolder(
-        private val binding: ItemNoteBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: Note) {
-            with(binding) {
-                textViewText.text = item.text
-                imageViewImage.setImageBitmap(item.bitmap)
-            }
-        }
     }
 }
 

@@ -2,6 +2,7 @@ package com.example.lesson001.presentation.list
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lesson001.presentation.NotesListAdapter
 
 class SwipeToDeleteCallback(private val adapter: NotesListAdapter) : ItemTouchHelper.Callback() {
     override fun getMovementFlags(

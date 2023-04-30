@@ -14,7 +14,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:title="@string/notes_list_title"
-            app:titleCentered="true">
+            app:titleCentered="true"
+            app:navigationIcon="@drawable/ic_back_24"
+            >
 
             <ImageButton
                 android:id="@+id/ImageButtonSearch"
@@ -25,15 +27,6 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/search"
                 android:src="@drawable/search1" />
-
-            <ImageButton
-                android:id="@+id/imageButtonBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_back_24"
-                android:contentDescription="@string/back" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 

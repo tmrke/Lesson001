@@ -17,17 +17,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:title="@string/notes_list_title"
-            app:titleCentered="true">
-
-            <ImageButton
-                android:id="@+id/imageButtonBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/back"
-                android:src="@drawable/ic_back_24" />
-
+            app:titleCentered="true"
+            app:navigationIcon="@drawable/ic_back_24"
+            >
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -51,6 +43,7 @@
         android:layout_margin="@dimen/margin_16dp"
         android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

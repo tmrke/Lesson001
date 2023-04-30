@@ -17,7 +17,6 @@ interface NotesDAO {
     @Query("DELETE FROM notes WHERE id = :id")
     suspend fun deleteNote(id: Long)
 
-    @Query("SELECT * FROM notes WHERE text = :text")
-    fun getNotesBySearch(text: String) : Flow<List<NoteEntity>>
-
+    @Query("SELECT * FROM notes WHERE text LIKE '%' || :text || '%'")
+    fun getNotesBySearch(text: String): Flow<List<NoteEntity>>
 }

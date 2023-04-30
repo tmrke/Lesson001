@@ -9,5 +9,5 @@ interface NotesRepository {
     fun getNotes(): Flow<List<Note>>
     suspend fun addNote(text: String, bitmap: Bitmap?)
     suspend fun deleteNote(id: Long)
-    fun getNotesBySearch(text: String)
+    fun getNotesBySearch(text: String): Flow<List<Note>>
 }
