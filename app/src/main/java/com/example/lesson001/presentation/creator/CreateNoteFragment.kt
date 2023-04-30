@@ -9,13 +9,18 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 
 
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.lesson001.R
 import com.example.lesson001.databinding.FragmentCreateNoteBinding
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class CreateNoteFragment : Fragment(R.layout.fragment_create_note) {
@@ -23,25 +28,26 @@ class CreateNoteFragment : Fragment(R.layout.fragment_create_note) {
     private val viewModel by viewModels<CreatorViewModel>()
     private var bitmap: Bitmap? = null
 
+    private val pickMedia =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            uri?.let {
+                lifecycleScope.launch {
+                    bitmap = withContext(Dispatchers.IO) {
+                        Picasso.get().load(uri).resize(500, 0).centerCrop().get()
+                    }
+
+                    binding.imageView.setImageBitmap(bitmap)
+                    binding.imageView.visibility = View.VISIBLE
+                }
+            }
+        }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
 
         with(binding) {
-            val pickMedia =
-                registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-                    uri?.let { imageUri ->
-                        bitmap = MediaStore.Images.Media.getBitmap(
-                            requireContext().contentResolver,
-                            imageUri
-                        )
-
-                        imageView.setImageBitmap(bitmap)
-                        imageView.visibility = View.VISIBLE
-                    }
-                }
-
             imageButtonAddImage.setOnClickListener {
                 pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                 imageButtonAddImage.visibility = View.INVISIBLE

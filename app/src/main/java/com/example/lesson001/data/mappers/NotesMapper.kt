@@ -41,7 +41,7 @@ class NotesMapper @Inject constructor() {
     fun toByteArray(bitmap: Bitmap?): ByteArray? {
        return if( bitmap != null){
             val outputStream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 60, outputStream)//TODO поиграться со сжатием изображением
+            bitmap.compress(Bitmap.CompressFormat.PNG, 1, outputStream)//TODO поиграться со сжатием изображением
             return outputStream.toByteArray()
         } else {
             null
