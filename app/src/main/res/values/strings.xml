@@ -6,5 +6,6 @@
     <string name="image">image</string>
     <string name="quick_notes">Quick notes</string>
     <string name="search">search</string>
+    <string name="back">back</string>
 
 </resources>

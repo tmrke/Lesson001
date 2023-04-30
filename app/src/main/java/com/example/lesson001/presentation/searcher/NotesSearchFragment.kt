@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -24,25 +25,28 @@ class NotesSearchFragment : Fragment(R.layout.fragment_search) {
     private val viewModel by viewModels<SearcherViewModel>()
 
     @Inject
-    lateinit var listAdapter: NotesListAdapter
+    lateinit var listAdapter: ListBySearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
 
-        //viewModel.getNotesBySearch(binding.editText.text)
+        binding.imageButtonBack.setOnClickListener {
+            navController.navigate(R.id.notesListFragment)
+        }
+
+        viewModel.getNotesBySearch(binding.editTextSearchField.text.toString())
 
         val recyclerView = binding.recyclerView
 
         recyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
-
+            layoutManager = LinearLayoutManager(context)
         }
 
-        val swipeToDeleteCallback =
-            SwipeToDeleteCallback(binding.recyclerView.adapter as NotesListAdapter)
-
-        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+//        val swipeToDeleteCallback =
+//            SwipeToDeleteCallback(binding.recyclerView.adapter as NotesListAdapter)
+//
+//        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+//        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 }
